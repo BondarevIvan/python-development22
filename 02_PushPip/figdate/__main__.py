@@ -10,8 +10,8 @@ def date(format_: str, font_: str):
 
 
 if __name__ == '__main__':
-    locale.setlocale(locale.LC_TIME, "C")
-    index = { 'format_' : 2, 'font_' : 1 }
+    locale.setlocale(locale.LC_TIME, ('ru_RU', 'UTF-8'))
+    index = { 'format_' : 1, 'font_' : 2 }
     default = {'format_' : '%Y %d %b, %A', 'font_' : 'graceful'}
     kwargs = {keyword : default[keyword] if len(sys.argv) <= index[keyword] else sys.argv[index[keyword]] for keyword in index}
     print(date(**kwargs))
