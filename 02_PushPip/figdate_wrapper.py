@@ -1,5 +1,6 @@
-import venv, sys, shutil
+import venv, sys, shutil, os
 from subprocess import run
+from contextlib import redirect_stderr, redirect_stdout
 
 
 def create_venv(directory: str):
@@ -7,7 +8,9 @@ def create_venv(directory: str):
 
 
 def install_figlet(venv_directory: str):
-    run([f'{venv_directory}/bin/pip', 'install', 'pyfiglet'])
+    with open('/tmp/help.txt', 'w') as std_out:
+        run([f'{venv_directory}/bin/pip', 'install', 'pyfiglet'], stdout=std_out)
+    os.remove('/tmp/help.txt')
 
 
 def run_figdate(venv_directory: str, args: list):
