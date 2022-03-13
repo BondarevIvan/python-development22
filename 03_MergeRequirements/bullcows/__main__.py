@@ -42,6 +42,29 @@ def _filter_words_(words: list, length: int):
     return [word for word in words if len(word) == length]
 
 
+def _try_local_parse_(place: str, length: int):
+    try:
+        with open(place, 'r') as file:
+            return _filter_words_(file.read().split('\n'), length)
+    except:
+        return []
+
+
+def _try_download_(place: str, length: int):
+    try:
+        data = requests.get(place).text
+        return _filter_words_(data.split('\n'), length)
+    except:
+        return []
+
+
+def _get_dict_(place: str, length: int):
+    dct = _try_download_(place, length)
+    if dct:
+        return dct
+    return _try_local_parse_(place, length)
+
+
 if __name__ == '__main__':
     dictionary, length = sys.argv[1], 5
     if len(sys.argv) > 2:
