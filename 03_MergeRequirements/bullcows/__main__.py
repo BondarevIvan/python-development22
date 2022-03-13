@@ -69,5 +69,5 @@ if __name__ == '__main__':
     dictionary, length = sys.argv[1], 5
     if len(sys.argv) > 2:
         length = int(sys.argv[2])
-    
-    gameplay(_default_ask_, _default_inform_, _get_dict_(dictionary, length))
+
+    print("Вы угадали число с", gameplay(_default_ask_, _default_inform_, _get_dict_(dictionary, length)), "попытки")
